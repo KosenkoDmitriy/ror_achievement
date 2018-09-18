@@ -70,3 +70,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'bootstrap-sass' # for Bootstrap 3 and 2
 gem 'bootstrap'
+gem 'jquery-rails'
