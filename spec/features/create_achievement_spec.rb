@@ -14,4 +14,11 @@ feature "createn new achievement" do
     expect(page).to have_content("Achievement has been created")
     expect(Achievement.last.title).to eq("Read a book")
   end
+  scenario "can not create achievement with invalid data" do
+    visit("/")
+    click_on("New Achievement")
+    click_on("Create Achievement")
+
+    expect(page).to have_content('can\'t be blank')
+  end
 end
