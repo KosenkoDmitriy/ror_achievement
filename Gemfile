@@ -40,7 +40,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  # gem 'factory_girl_rails'
+  gem 'factory_bot'
   
   # for vs code
   # debug
@@ -71,3 +72,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'bootstrap-sass' # for Bootstrap 3 and 2
 gem 'bootstrap'
 gem 'jquery-rails'
+
