@@ -6,12 +6,14 @@ class AchievementsController < ApplicationController
   def create
     @achievement = Achievement.new(achievement_params)
     if @achievement.save
-      # flash[:notice] = "Achievement has been created"
       redirect_to root_url, notice: "Achievement has been created"
     else
       render :new
-      # redirect_to root_url, notice: "can't be blank"
     end
+  end
+
+  def show
+    @achievement = Achievement.find(params[:id])
   end
 
   private
