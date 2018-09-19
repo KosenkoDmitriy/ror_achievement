@@ -16,6 +16,19 @@ describe AchievementsController do
     end
   end
 
+  describe 'GET edit' do
+    let(:achievement) { create(:public_achievement) }
+    it 'renders :edit template' do
+      get :edit, params: { id: achievement.id }
+      expect(response).to render_template(:edit)
+    end
+
+    it 'assigns the requested achievement' do
+      get :edit, params: { id: achievement.id }
+      expect(assigns(:achievement)).to eq(achievement)
+    end
+  end
+
   describe 'GET new' do
     it 'renders :new template' do
       # get post put delete

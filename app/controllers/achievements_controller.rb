@@ -6,6 +6,10 @@ class AchievementsController < ApplicationController
     @achievements = Achievement.public_access #.where(privacy: :public_access)
   end
 
+  def edit
+    @achievement = Achievement.find(params[:id])
+  end
+
   def new
     @achievement = Achievement.new
   end
