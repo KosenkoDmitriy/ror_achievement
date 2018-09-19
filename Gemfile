@@ -79,3 +79,5 @@ gem 'jquery-rails'
 gem 'simple_form'
 
 gem 'redcarpet' # markdown
+
+gem 'devise'
