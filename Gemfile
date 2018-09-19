@@ -52,7 +52,7 @@ group :development, :test do
   gem 'ruby-debug-ide'
   # format, lint
   gem 'rubocop'
-  gem 'rufo' # formatting on save https://github.com/bessey/vscode-rufo
+  # gem 'rufo' # formatting on save https://github.com/bessey/vscode-rufo
 end
 
 group :test do

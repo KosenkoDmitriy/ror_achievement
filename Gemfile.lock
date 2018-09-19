@@ -204,7 +204,6 @@ GEM
       rake (>= 0.8.1)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
-    rufo (0.4.0)
     sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -283,7 +282,6 @@ DEPENDENCIES
   rspec-rails
   rubocop
   ruby-debug-ide
-  rufo
   sass-rails (~> 5.0)
   simple_form
   simplecov
