@@ -2,9 +2,17 @@
 
 require 'rails_helper'
 require_relative '../support/new_achievement_form'
+require_relative '../support/login_form'
 
 feature 'createn new achievement' do
   let(:new_achievement_form) { NewAchievementForm.new }
+  let(:login_form) { LoginForm.new }
+  let(:user) { create(:user) }
+
+  background do # alias for feature
+  # before do # alias for describe
+    login_form.visit_page.login_as(user)
+  end
 
   scenario 'create new achievement with valida data' do
     new_achievement_form.visit_page.fill_in_with(title: 'Read a book').submit
