@@ -19,6 +19,11 @@ class AchievementsController < ApplicationController
     end
   end
 
+  def destroy
+    Achievement.find(params[:id]).destroy
+    redirect_to achievements_url
+  end
+
   def new
     @achievement = Achievement.new
   end

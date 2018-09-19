@@ -62,6 +62,18 @@ describe AchievementsController do
       end
     end
   end
+
+  describe 'DELETE destroy' do
+    let(:achievement) { create(:public_achievement) }
+    it 'redirects to achievements#index' do
+      delete :destroy, params: { id: achievement.id }
+      expect(response).to redirect_to(achievements_url)
+    end
+    it 'deletes achievements from database' do
+      delete :destroy, params: { id: achievement.id }
+      expect(Achievement.exists?(achievement.id)).to eq(false)
+    end
+  end
   
   describe 'GET new' do
     it 'renders :new template' do
