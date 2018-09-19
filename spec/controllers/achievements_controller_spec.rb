@@ -2,6 +2,20 @@ require 'rails_helper'
 
 # describe AchievementsController, type: :controller do
 describe AchievementsController do
+
+  describe 'GET index' do
+    it 'renders :index template' do
+      get :index
+      expect(response).to render_template(:index)
+    end
+    it 'assings only public achievements to template' do
+      public_achievement = create(:public_achievement)
+      private_achievement = create(:private_achievement)
+      get :index
+      expect(assigns(:achievements)).to match_array([public_achievement])
+    end
+  end
+
   describe 'GET new' do
     it 'renders :new template' do
       # get post put delete

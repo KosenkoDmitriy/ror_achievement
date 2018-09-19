@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class AchievementsController < ApplicationController
+  
+  def index
+    @achievements = Achievement.public_access #.where(privacy: :public_access)
+  end
+
   def new
     @achievement = Achievement.new
   end
