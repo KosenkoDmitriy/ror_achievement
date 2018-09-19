@@ -3,7 +3,7 @@ require 'rails_helper'
 # describe AchievementsController, type: :controller do
 describe AchievementsController do
 
-  describe 'guest user' do
+  shared_examples 'public access to achievements' do
     describe 'GET index' do
       it 'renders :index template' do
         get :index
@@ -30,6 +30,11 @@ describe AchievementsController do
         expect(assigns(:achievement)).to eq(achievement)
       end
     end
+  end
+
+  describe 'guest user' do
+
+    it_behaves_like 'public access to achievements'
 
     describe 'GET new' do
       it 'redirects to login page because guest can not create a new achievement' do 
@@ -70,39 +75,13 @@ describe AchievementsController do
   describe 'authentificated user' do
 
     let(:user) { create(:user) }
-    
+
     before do
       sign_in(user)
     end
 
-    describe 'GET index' do
-      it 'renders :index template' do
-        get :index
-        expect(response).to render_template(:index)
-      end
-      it 'assings only public achievements to template' do
-        public_achievement = create(:public_achievement)
-        private_achievement = create(:private_achievement)
-        get :index
-        expect(assigns(:achievements)).to match_array([public_achievement])
-      end
-    end
+    it_behaves_like 'public access to achievements'
 
-    describe 'GET show' do
-      let(:achievement) { FactoryBot.create(:public_achievement) }
-  
-      it 'renders :show template' do
-        get :show, params: { id: achievement.id }
-        expect(response).to render_template(:show)
-      end
-  
-      it 'assigns requested achievement to @achievement' do
-        get :show, params: { id: achievement.id }
-        expect(assigns(:achievement)).to eq(achievement)
-      end
-    end
-    
-     
     describe 'GET new' do
       it 'renders :new template' do
         # get post put delete
