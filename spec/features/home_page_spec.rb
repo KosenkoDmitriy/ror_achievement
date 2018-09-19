@@ -1,8 +1,10 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-feature "home page" do
-  scenario "welcome page" do
-    visit("/")
-    expect(page).to have_content("welcome")
+require 'rails_helper'
+
+feature 'home page' do
+  scenario 'welcome page' do
+    visit('/')
+    expect(page).to have_content('welcome')
   end
 end

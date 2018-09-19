@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :achievement do
     # title { "Title" }
     sequence(:title) { |n| "Achievement #{n}" }
-    description { "Description" }
+    description { 'Description' }
     privacy { Achievement.privacies[:private_access] }
     featured { false }
     cover_image { "#{Rails.root}/fixtures/cover_image.png" }
