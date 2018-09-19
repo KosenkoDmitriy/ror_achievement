@@ -29,6 +29,30 @@ describe AchievementsController do
     end
   end
 
+  describe 'PUT update' do
+    let(:achievement) { create(:public_achievement)}
+
+    context 'valid data' do
+      let(:valid_data) { attributes_for(:public_achievement, title: 'New Title') }
+      
+      it 'redirects to achievements#show' do
+        put :update, params: { id: achievement.id, achievement: valid_data }
+        expect(response).to redirect_to(achievement_url(achievement))
+      end
+
+      it 'updated achievement in the database' do
+        # achievement_updated = create(:achievement)
+        put :update, params: { id: achievement, achievement: valid_data }
+        achievement.reload # reload our achievement module from a database
+        expect(achievement.title).to eq('New Title')
+      end
+    end
+
+    context 'invalid data' do
+      let(:invalid_data) { attributes_for(:public_achievement, title: '') }
+    end
+  end
+  
   describe 'GET new' do
     it 'renders :new template' do
       # get post put delete
