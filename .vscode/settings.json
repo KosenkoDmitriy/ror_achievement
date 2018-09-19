@@ -1,6 +1,6 @@
 {
   "workbench.colorTheme": "Visual Studio Light",
-  "editor.formatOnSaveTimeout": 1750,
+  "editor.formatOnSaveTimeout": 750,
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
