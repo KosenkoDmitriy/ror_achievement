@@ -49,7 +49,17 @@ describe AchievementsController do
     end
 
     context 'invalid data' do
-      let(:invalid_data) { attributes_for(:public_achievement, title: '') }
+      let(:invalid_data) { attributes_for(:public_achievement, title: '', description: 'new description') }
+      it 'renders :edit template' do
+        put :update, params: { id: achievement, achievement: invalid_data }
+        expect(response).to render_template(:edit)
+      end
+      it 'does not update achievement in the database' do
+        put :update, params: { id: achievement, achievement: invalid_data }
+        achievement.reload
+        expect(achievement.description).not_to eq('new description')
+        expect(achievement.title).not_to eq('')
+      end
     end
   end
   

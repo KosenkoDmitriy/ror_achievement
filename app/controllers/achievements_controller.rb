@@ -12,8 +12,11 @@ class AchievementsController < ApplicationController
 
   def update
     @achievement = Achievement.find(params[:id])
-    redirect_to achievement_url(@achievement) if @achievement.update_attributes(achievement_params)
-    # redirect_to achievement_url(params[:id])
+    if @achievement.update_attributes(achievement_params)
+      redirect_to achievement_url(@achievement)
+    else
+      render :edit
+    end
   end
 
   def new
