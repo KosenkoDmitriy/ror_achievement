@@ -81,3 +81,4 @@ gem 'simple_form'
 gem 'redcarpet' # markdown
 
 gem 'devise'
+gem 'rename' # rails g rename:into achievement_app
