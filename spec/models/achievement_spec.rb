@@ -15,8 +15,8 @@ RSpec.describe Achievement, type: :model do
     it 'requires title to be unique for one user' do
       user = create(:user)
       first_achievement = create(:public_achievement, title: 'first', user: user)
-      new_achievement = build(:public_achievement, title: 'first', user: user)
-      # new_achievement = Achievement.new(title: 'first', user: user)
+      # new_achievement = build(:public_achievement, title: 'first', user: user)
+      new_achievement = Achievement.new(title: 'first', user: user)
       expect(new_achievement.valid?).to eq(false)
     end
 
@@ -24,9 +24,27 @@ RSpec.describe Achievement, type: :model do
       user1 = create(:user)
       user2 = create(:user)
       achievement1 = create(:achievement, user: user1, title: 'title')
-      achievement2 = create(:achievement, user: user2, title: 'title')
+      # achievement2 = create(:achievement, user: user2, title: 'title')
+      achievement2 = Achievement.new(user: user2, title: 'title')
       expect(achievement1.title).to eq(achievement2.title)
       expect(achievement2.valid?).to be_truthy # eq(true)
     end
+  end
+
+  it 'belongs to user' do
+    achievement = Achievement.new(title: 'title', user: nil)
+    expect(achievement.valid?).to eq(false)
+  end
+
+  it 'has belongs_to user association' do
+    # 1 approach
+    user = create(:user)
+    achievement = create(:public_achievement, user: user)
+    expect(achievement.user).to eq(user)
+
+    # 2 approach
+    u = Achievement.reflect_on_association(:user)
+    expect(u.macro).to eq(:belongs_to)
+
   end
 end

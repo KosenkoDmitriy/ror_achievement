@@ -5,6 +5,7 @@ class Achievement < ApplicationRecord # ActiveRecord::Base
 
   validates :title, presence: true
   # validates :title, uniqueness: true
+  validates :user, presence: true
   validate :unique_title_for_one_user
   
   # enum privacy: %i[public_access private_access friend_access]
