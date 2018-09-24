@@ -2,11 +2,15 @@
 
 class Achievement < ApplicationRecord # ActiveRecord::Base
   belongs_to :user, required: false
+  validates :user, presence: true
 
   validates :title, presence: true
   # validates :title, uniqueness: true
-  validates :user, presence: true
-  validate :unique_title_for_one_user
+  # validate :unique_title_for_one_user
+  validates :title, uniqueness: {
+    scope: :user_id,
+    message: "you can't have two achievements with the same title"
+  }
   
   # enum privacy: %i[public_access private_access friend_access]
   enum privacy: [ :public_access, :private_access, :friend_access ]

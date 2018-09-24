@@ -11,6 +11,7 @@ RSpec.describe Achievement, type: :model do
       # expect(achievement.title).not_to be_empty
       expect(achievement.valid?).to eq(false)
     end
+    it { should validate_presence_of(:title) }
 
     it 'requires title to be unique for one user' do
       user = create(:user)
@@ -29,12 +30,18 @@ RSpec.describe Achievement, type: :model do
       expect(achievement1.title).to eq(achievement2.title)
       expect(achievement2.valid?).to be_truthy # eq(true)
     end
+
+    it { should validate_uniqueness_of(:title).scoped_to(:user_id).with_message("you can't have two achievements with the same title") }
+
   end
+
 
   it 'belongs to user' do
     achievement = Achievement.new(title: 'title', user: nil)
     expect(achievement.valid?).to eq(false)
   end
+  
+  it { should validate_presence_of(:user) }
 
   it 'has belongs_to user association' do
     # 1 approach
@@ -47,4 +54,6 @@ RSpec.describe Achievement, type: :model do
     expect(u.macro).to eq(:belongs_to)
 
   end
+
+  it { should belong_to(:user) } # or it { is_expected.to belong_to(:user) }
 end

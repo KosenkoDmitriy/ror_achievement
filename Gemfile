@@ -44,7 +44,6 @@ group :development, :test do
   gem 'rspec-rails'
   # gem 'factory_girl_rails'
   gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
 
   # for vs code
   # debug
@@ -57,7 +56,10 @@ end
 
 group :test do
   gem 'capybara'
+# gem 'cucumber-rails', require: false
   gem 'simplecov'
+  gem 'shoulda-matchers', require: false
+  gem 'rails-controller-testing'
 end
 
 group :development do
