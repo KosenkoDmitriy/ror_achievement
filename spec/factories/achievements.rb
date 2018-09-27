@@ -8,6 +8,12 @@ FactoryBot.define do
     featured { false }
     cover_image { "#{Rails.root}/fixtures/cover_image.png" }
 
+    # factory :achievement_with_user do
+    # user's association
+    user
+    # association :user, factory: :user, strategy: :build #, email: 'Custom@email.ru'
+    # end
+
     factory :public_achievement do
       privacy { :public_access }
     end

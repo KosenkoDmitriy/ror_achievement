@@ -96,7 +96,10 @@ describe AchievementsController do
     end
 
     describe 'POST create' do
-      let (:valid_data) { attributes_for(:public_achievement) }
+      let (:valid_data) { 
+        # attributes_for(:public_achievement) 
+        build(:public_achievement).attributes #.except('id')
+      }
       context 'valid data' do
         it 'redirects to achievements#show' do
           post :create, params: { achievement: valid_data }

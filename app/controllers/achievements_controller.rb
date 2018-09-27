@@ -30,9 +30,14 @@ class AchievementsController < ApplicationController
 
   def create
     @achievement = Achievement.new(achievement_params)
+    @achievement.user = current_user
     if @achievement.save
       redirect_to achievement_url(@achievement), notice: 'Achievement has been created'
     else
+      # notice = @achievement.errors.messages.map { |msg| msg }.join(' ') # lowercase
+      notice = @achievement.errors.full_messages.join(' ') # capitalize
+      # notice = @achievement.errors.messages.map { |k, v| "#{k}: #{v.split(',').join(' & ')}" }.join("; ") #{ |k,v| "#{k}: #{v}" }.join(";") # custom with ; and & delimitters
+      flash[:error] = notice
       render :new
     end
   end
@@ -44,7 +49,7 @@ class AchievementsController < ApplicationController
   private
 
   def achievement_params
-    params.require(:achievement).permit(:title, :description, :privacy, :cover_image, :featured)
+    params.require(:achievement).permit(:id, :title, :description, :privacy, :cover_image, :featured)
   end
 
   def owners_only

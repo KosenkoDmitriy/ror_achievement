@@ -51,6 +51,11 @@
       <%= flash[:notice] %>
     </div>
     <% end %>
+    <% if flash[:error] %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+    <% end %>
     <%= yield %>
   </div>
 </body>

@@ -37,10 +37,13 @@ RSpec.describe Achievement, type: :model do
 
   it 'belongs to user' do
     achievement = Achievement.new(title: 'title', user: nil)
-    expect(achievement.valid?).to eq(true)
+    expect(achievement.valid?).to eq(false)
   end
   
-  it { is_expected.not_to validate_presence_of(:user) }
+  it { 
+    # is_expected.not_to validate_presence_of(:user) 
+    should validate_presence_of(:user)
+  }
 
   it 'has belongs_to user association' do
     # 1 approach

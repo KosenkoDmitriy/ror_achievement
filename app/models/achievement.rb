@@ -2,7 +2,7 @@
 
 class Achievement < ApplicationRecord # ActiveRecord::Base
   belongs_to :user, required: false
-  validates :user, presence: false
+  validates :user, presence: true
 
   validates :title, presence: true
   # validates :title, uniqueness: true

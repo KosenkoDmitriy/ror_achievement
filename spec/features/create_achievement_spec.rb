@@ -16,7 +16,7 @@ feature 'createn new achievement' do
 
   scenario 'create new achievement with valida data' do
     new_achievement_form.visit_page.fill_in_with(title: 'Read a book').submit
-    expect(page).to have_content('Achievement has been create')
+    expect(page).to have_content('Achievement has been created')
     expect(Achievement.last.title).to eq('Read a book')
   end
 
