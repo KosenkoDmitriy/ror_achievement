@@ -19,6 +19,14 @@ class Achievement < ApplicationRecord # ActiveRecord::Base
     Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(description)
   end
 
+  def title_by_email
+    "#{title} by #{user.email}"
+  end
+
+  def self.by_letter(letter)
+    includes(:user).where('title like ?', "#{letter}%").order('users.email')
+  end
+
   private
 
   def unique_title_for_one_user
@@ -27,5 +35,5 @@ class Achievement < ApplicationRecord # ActiveRecord::Base
       errors.add(:title, "you can't have two achievements with the same title")
     end
   end
-
+  
 end

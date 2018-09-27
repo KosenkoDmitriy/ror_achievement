@@ -3,6 +3,33 @@
 require 'rails_helper'
 
 RSpec.describe Achievement, type: :model do
+
+  it 'converts markdown to html' do
+    achievement = Achievement.new(description: 'Awesome **thing** I *actually* did')
+    expect(achievement.description_html).to include('<strong>thing</strong>')
+    expect(achievement.description_html).to include('<em>actually</em>')
+  end
+
+  it 'has a silly title' do
+    achievement = Achievement.new(title: 'silly title', user: create(:user, email: 'test@test.ru'))
+    expect(achievement.title_by_email).to eq('silly title by test@test.ru')
+  end
+
+  it 'only fetches achievements which title starts from provided letter' do
+    user = create(:user)
+    achievement1 = create(:public_achievement, title: 'Read a book')
+    achievement2 = create(:public_achievement, title: 'Passed a test')
+    expect(Achievement.by_letter('R')).to eq([achievement1])
+  end
+
+  it 'sorts achievements by user emails' do
+    katy = create(:user, email: 'katy@email.ru')
+    alice = create(:user, email: 'alice@email.ru')
+    achievement_katy = create(:public_achievement, title: 'Read a book', user: katy)
+    achievement_alice = create(:public_achievement, title: 'Rocket it', user: alice)
+    expect(Achievement.by_letter('R')).to eq([achievement_alice, achievement_katy])
+  end
+
   describe 'validations' do
     it 'requires title' do
       achievement = Achievement.new(title: '')
