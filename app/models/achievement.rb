@@ -26,7 +26,10 @@ class Achievement < ApplicationRecord # ActiveRecord::Base
   def self.by_letter(letter)
     includes(:user).where('title like ?', "#{letter}%").order('users.email')
   end
-
+  
+  def self.get_public_achievements
+  end
+  
   private
 
   def unique_title_for_one_user
@@ -36,4 +39,5 @@ class Achievement < ApplicationRecord # ActiveRecord::Base
     end
   end
   
+
 end

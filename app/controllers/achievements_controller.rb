@@ -5,7 +5,7 @@ class AchievementsController < ApplicationController
   before_action :owners_only, only: [ :edit, :update, :destroy ]
 
   def index
-    @achievements = Achievement.public_access #.where(privacy: :public_access)
+    @achievements = Achievement.get_public_achievements
   end
 
   def edit
@@ -29,17 +29,10 @@ class AchievementsController < ApplicationController
   end
 
   def create
-    @achievement = Achievement.new(achievement_params)
-    @achievement.user = current_user
-    if @achievement.save
-      redirect_to achievement_url(@achievement), notice: 'Achievement has been created'
-    else
-      # notice = @achievement.errors.messages.map { |msg| msg }.join(' ') # lowercase
-      notice = @achievement.errors.full_messages.join(' ') # capitalize
-      # notice = @achievement.errors.messages.map { |k, v| "#{k}: #{v.split(',').join(' & ')}" }.join("; ") #{ |k,v| "#{k}: #{v}" }.join(";") # custom with ; and & delimitters
-      flash[:error] = notice
-      render :new
-    end
+    achievement = CreateAchievement.new(achievement_params, current_user)
+    achievement.create
+    # CreateAchievement.new(params[:achievement], current_user)
+    # render nothing: true
   end
 
   def show
