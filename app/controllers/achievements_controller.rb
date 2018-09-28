@@ -29,10 +29,14 @@ class AchievementsController < ApplicationController
   end
 
   def create
-    achievement = CreateAchievement.new(achievement_params, current_user)
-    achievement.create
-    # CreateAchievement.new(params[:achievement], current_user)
-    # render nothing: true
+    service = CreateAchievement.new(achievement_params, current_user)
+    service.create
+    if service.created?
+      redirect_to achievement_path(service.achievement)
+    else
+      @achievement = service.achievement
+      render :new
+    end
   end
 
   def show
