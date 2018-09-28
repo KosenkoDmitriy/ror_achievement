@@ -27,6 +27,11 @@ class Achievement < ApplicationRecord # ActiveRecord::Base
     includes(:user).where('title like ?', "#{letter}%").order('users.email')
   end
 
+  mount_uploader :cover_image, CoverImageUploader
+  def self.cover_image_identifier
+     
+  end
+
   private
 
   def unique_title_for_one_user
